@@ -1,6 +1,5 @@
 # 📈 Trading Academy
 
-![Trading Academy Banner](https://via.placeholder.com/900x200?text=Trading+Academy)
 
 ## 🚀 Project Description
 Trading Academy is an **online learning platform** for trading and financial markets. Users can:
