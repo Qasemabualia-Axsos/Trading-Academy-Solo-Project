@@ -1,0 +1,91 @@
+button{
+    background-color: #0f828c;
+    width: 140px;
+    margin:15px auto; 
+    color: white; 
+    border-radius: 10px;
+    font-family: 'Times New Roman', Times, serif
+}
+button:hover{
+    background-color: rgb(90, 90, 165);
+}
+.container{
+    width: 1800px;
+}
+.bottom {
+    background-color: #0f828c;   
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    padding: 30px;
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
+                            
+}
+
+.bottom ol {
+    list-style: none;           
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;                   
+    margin: 0;
+    padding: 0;
+}
+
+.bottom img {
+    width: 30px;                 
+    height: auto;
+}#copyright{
+    font-family: 'Times New Roman', Times, serif;
+}
+.icons{
+    display: flex;
+    justify-content: space-between;
+}
+#logo{
+    height: 50px;
+}
+
+
+.mb-3{
+    width: 250px;
+
+}
+.card-body{
+    height: 750px;
+    display: flex;
+    justify-content: space-between;
+    animation: slideFade 1s ease-out;
+
+}
+#acd-img{
+    width: 350px;
+    padding: 5px;
+    border: 1px solid black;
+    height: 380px;
+    margin: auto;
+    
+}
+.card-header{
+    background-color: #0f828c;
+}
+.row{
+    margin: 20px auto ;
+}
+form{
+    
+    margin:50px auto;
+
+}
+
+@keyframes slideFade{
+    from{
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

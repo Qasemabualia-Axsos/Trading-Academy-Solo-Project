@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<link rel="stylesheet" href="{% static 'solo_project_app/login.css' %}">
+
+<body>
+
+
+    <!-- login form -->
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg rounded-3" style="border: 1px solid black; width: 1000px;">
+                <div class="card-header text-center  text-white">
+                    <h4>Log In</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <!-- Submit -->
+                        <div class="d-grid">
+                            <button type="submit">Log In</button>
+                        </div>
+                        <p>Dont have an account?<a href="{% url 'register_page' %}"> Open an Account</a></p>
+                        {% if messages %}
+                        <ul class="messages text-danger">
+                            {% for message in messages %}
+                            {% if 'login' in message.tags %}
+                            <li>{{message}}</li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </form>
+                    <img id="acd-img" src="{% static 'images/channels4_profile.jpg' %}" alt="acamedy-img">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="bottom " style="height: 80px; padding: 25px;">
+        <h1 id="copyright">© ABU ALIA ICT</h1>
+        <ol class="icons">
+            <li><img src="{% static 'images/icons8-whatsapp-50.png' %}" alt="logo-watsapp"></li>
+            <li><img src="{% static 'images/sc+linkedin-131965017554733397.png' %}" alt="logo-linkedin"></li>
+            <li><img src="{% static 'images/email-icon-envelope-mail-services-contacts-message-send-letter-isolated-flat-free-vector.png' %}"
+                    alt="logo-email"></li>
+            <li><img src="{% static 'images/insta.png' %}" alt="logo-instagram"></li>
+        </ol>
+    </div>
+
+
+</body>
+
+</html>

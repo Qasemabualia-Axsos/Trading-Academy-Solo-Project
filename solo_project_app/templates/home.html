@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbuAlia ICT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<link rel="stylesheet" href="{% static 'solo_project_app/style.css' %}">
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid ">
+            <img id="logo" src="{% static 'images/channels4_profile.jpg' %}" alt="">
+            <div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <a class="login-link" href="{% url 'login_page' %}"><button  id="login-btn" >Log In</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="content ">
+        <div class="left ">
+            <div class="parent">
+                <h1>Who Wr Are</h1>
+                <div class="par">
+                    <p>ABU ALIA ICT is a modern trading academy dedicated to helping individuals master Forex trading
+                        and financial markets. We believe trading is not just about numbers, but about discipline,
+                        strategy, and continuous learning. Our goal is to make professional trading education accessible
+                        to everyone.</p>
+                </div>
+            </div>
+            <div class="parent">
+                <h1>Our Mission</h1>
+                <div class="par">
+                    <p>To provide high-quality, practical, and affordable Forex education that equips learners with the
+                        tools and mindset needed to succeed in today's fast-moving markets.</p>
+                </div>
+            </div>
+            <div class="parent">
+                <h1>Reach Us</h1>
+                <div class="par">
+                    <p>Phone Number: +972598456809</p>
+                    <p><a class="telegram" href="https://t.me/+ySH4eySlr1lhY2Nk">Join the private channel on Telegram</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="parent">
+                <h1>What We Offer</h1>
+                <div class="par">
+                    <p>We have a multiple Courses like ICT, SMC, SNR...,every Course conain from multy Lessons.AND You will have a Support and join the private telegram channel.</p>
+                </div>
+            </div>
+            <div class="parent">
+                <h1>Why Choose Us?</h1>
+                <div class="par">
+                    <p>. Clear and structured learning path.</p>
+                    <p>. Content designed for both beginners and advanced traders.</p>
+                    <p>. Focus on risk management and sustainable growth.</p>
+                    <p>. Ongoing updates to match changing market conditions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom " style="height: 80px; padding: 25px;" >
+        <h1 id="copyright" >© ABU ALIA ICT</h1>
+        <ol class="icons">
+            <li><img src="{% static 'images/icons8-whatsapp-50.png' %}" alt="logo-watsapp"></li>
+            <li><img src="{% static 'images/sc+linkedin-131965017554733397.png' %}"alt="logo-linkedin"></li>
+            <li><img src="{% static 'images/email-icon-envelope-mail-services-contacts-message-send-letter-isolated-flat-free-vector.png' %}" alt="logo-email"></li>
+            <li><img src="{% static 'images/insta.png' %}" alt="logo-instagram"></li>
+        </ol>
+    </div>
+
+</body>
+
+</html>

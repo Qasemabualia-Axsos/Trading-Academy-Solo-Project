@@ -1,0 +1,12 @@
+{% if result %}
+    {% for lesson in result %}
+        <div class="lesson-card">
+            <h4>{{ lesson.order }}. {{ lesson.title }}</h4>
+            <p>{{ lesson.description }}</p>
+            <iframe src="https://www.youtube.com/embed/{{ lesson.video_url }}"
+                    frameborder="0" allowfullscreen></iframe>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No lessons found</p>
+{% endif %}

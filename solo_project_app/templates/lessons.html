@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbuAlia ICT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'solo_project_app/lesson.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid ">
+            <img id="logo" src="{% static 'images/channels4_profile.jpg' %}" alt="Trading Academy">
+            <h1>Welcome {{user.first_name}}!</h1>
+
+            <div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <a class="login-link" href="{% url 'dashboard' %}"><button id="login-btn">Dashboard</button></a>
+                    <a class="login-link" href="{% url 'logout' %}"><button id="login-btn">Log Out</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="search">
+        <input type="search" name="search" id="search-input">
+        <button>Search</button>
+        <div id="search-result">
+            {% for course in Courses %}
+            <div class="course-card">
+                <h3>{{course.title}}</h3>
+                <p>{{course.description}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+        <main>
+        <!-- <a href="https://www.forexfactory.com/attachment/file/4435106?d=1681044827">Get ICT Model 2022 Book</a><br>
+        <a href="https://tools.sodapdf.com/document/b4bfa8d9-209f-4bc2-ac47-e60df44f2ab7">Get SMC Book</a> -->
+        <div class="left">
+            {% if purchased_courses %}
+            {% for course in purchased_courses %}
+            <div class="courses">
+                <h1 id="title">Course Name : {{ course.title }}</h1>
+                <div class="course-1">
+                    {% for lesson in course.lessons.all %}
+                    <h2 id="l-title">{{ lesson.order }}. {{ lesson.title }}</h2>
+                    <iframe src="https://www.youtube.com/embed/{{ lesson.video_url}}" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>></iframe>
+                    {% empty %}
+                    <p>No lessons availaple for this course yet</p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>You haven't purchased any courses yet.</p>
+            {% endif %}
+        </div>
+
+    </main>
+    <div class="bottom " style="height: 80px; padding: 25px;">
+        <h1 id="copyright">© ABU ALIA ICT</h1>
+        <ol class="icons">
+            <li><img src="{% static 'images/icons8-whatsapp-50.png' %}" alt="logo-watsapp"></li>
+            <li><img src="{% static 'images/sc+linkedin-131965017554733397.png' %}" alt="logo-linkedin"></li>
+            <li><img src="{% static 'images/email-icon-envelope-mail-services-contacts-message-send-letter-isolated-flat-free-vector.png' %}"
+                    alt="logo-email"></li>
+            <li><img src="{% static 'images/insta.png' %}" alt="logo-instagram"></li>
+        </ol>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+
+nav{
+    background-color: #0f828c;
+    padding: 0 50px 0 50px;
+}
+.login-link{
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+}
+#login-btn{
+    background-color: #0f828c;
+    box-shadow: 6px 6px 10px black;
+    width: 130px;
+    height: 40px;
+  
+    color: white;
+    font-size: 20px;
+}
+#login-btn:hover{
+    background-color: white;
+    color: black;
+}
+#welcome{
+    color: white;
+}
+.par{
+    background-color: #0f828c;
+    color: white;
+    padding: 20px;
+
+
+}
+.parent{
+    margin-top: 30px;
+    width: 70%;
+}
+.telegram{
+    color: white;
+}
+.bottom {
+    background-color: #0f828c;   
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    padding: 30px;
+    position: sticky;
+    width: 100%;
+    bottom: 0%;
+                            
+}
+
+.bottom ol {
+    list-style: none;           
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;                   
+    margin: 0;
+    padding: 0;
+}
+
+.bottom img {
+    width: 30px;                 
+    height: auto;
+}#copyright{
+    font-family: 'Times New Roman', Times, serif;
+}
+.icons{
+    display: flex;
+    justify-content: space-between;
+}
+#logo{
+    height: 50px;
+}
+
+.log{
+    background-color: red;
+}
+.courses{
+    margin: 20px;
+    padding: 30px;
+    text-align: center;
+    background-color: #0f828c;
+    color: white;
+    font-size: 30px;
+    border: 3px solid black;
+    border-radius: 15px;
+}
+.left{
+    width: 50%;
+    margin: 30px;
+    padding: 20px;
+
+}
+button{
+    width: 220px;
+    height: 80px;
+    background-color: white;
+    box-shadow: 6px 6px 6px black;
+}
+button:hover{
+    background-color: orange;
+    color: white;
+}
+.table{
+    width: 80%;
+    margin: 60px;
+    border: 1px solid black;
+    font-size: 50px;
+}
+.middle{
+    display: flex;
+    justify-content: space-between;
+}
+.feed{
+    border: 1px solid black;
+}
+button{
+    background-color: #0f828c;
+    width: 250px;
+    margin:15px auto; 
+    color: white; 
+    border-radius: 10px;
+    font-family: 'Times New Roman', Times, serif
+}
+button:hover{
+    background-color: rgb(90, 90, 165);
+}

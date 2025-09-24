@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbuAlia ICT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<link rel="stylesheet" href="{% static 'solo_project_app/dashboard.css' %}">
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid ">
+            <img id="logo" src="{% static 'images/channels4_profile.jpg' %}" alt="Trading Academy">
+            <h1>Welcome {{user.first_name}}!</h1>
+
+            <div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <a class="login-link" href="{% url 'logout' %}"><button id="login-btn">Log Out</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="middle">
+        <div class="left">
+            <h1>Courses <a href="{% url 'lessons_page' %}">View my courses</a> </h1>
+            {% for course in Courses %}
+            <div class="courses">
+                <h2 style="color: orange;">{{course.title}}</h2>
+                <p>{{course.description}}</p>
+               <a href="{% url 'payment_page' course.id%}"> <button>Buy for {{course.price}}$</button></a>
+                <div class="feed"
+                    style="border: 3px solid black; margin-top: 20px; background-color: white; color: black;">
+                    <h1>Feedbacks</h1>
+                    <div class="comments">
+                        <form action="{% url 'add_feedback' course.id%}" method="post">
+                            {% csrf_token %}
+                            <label for="comment">Add Comment</label>
+                            <textarea style="width: 400px; margin: auto;" class="form-control" name="comment"
+                                id="comment"></textarea>
+                            <button style="margin-top: 20px;width: 150px;"> submit </button>
+                             {% if messages %}
+                        <ul class="messages text-danger">
+                            {% for message in messages %}
+                            {% if 'feedback' in message.tags %}
+                            <li>{{message}}</li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        </form>
+                    </div>
+                    {% if course.feedbacks.all %}
+                    {% for fb in course.feedbacks.all %}
+                    <p> <span style="color: #0f828c;">{{fb.user.first_name}} {{fb.user.last_name}}:</span>
+                        {{fb.comment}}</p>
+
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="right" style="margin: 50px;">
+            <h1>Exchange Rates</h1>
+            <ul style="font-size: 50px; border: 3px solid black; padding: 80px;">
+                <li>EUR/USD: <span id="eurusd">{{ eurusd }}</span></li>
+                <li>USD/JPY: <span id="usdjpy">{{ usdjpy }}</span></li>
+                <li>GBP/USD: <span id="gbpusd">{{ gbpusd }}</span></li>
+                <li>EUR/GBP: <span id="eurgbp">{{ eurgbp }}</span></li>
+            </ul>
+
+            <script>
+                function updateRates() {
+                    fetch("{% url 'get_rates' %}")
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('eurusd').innerText = data.eurusd;
+                            document.getElementById('usdjpy').innerText = data.usdjpy;
+                            document.getElementById('gbpusd').innerText = data.gbpusd;
+                            document.getElementById('eurgbp').innerText = data.eurgbp;
+                        })
+                        .catch(error => console.error('Error fetching rates:', error));
+                }
+
+                // Update immediately when page loads
+                updateRates();
+
+                // Then update every 10 seconds
+                setInterval(updateRates, 10000);
+            </script>
+
+        </div>
+    </div>
+
+    <div class="bottom " style="height: 80px; padding: 25px;">
+        <h1 id="copyright">© ABU ALIA ICT</h1>
+        <ol class="icons">
+            <li><img src="{% static 'images/icons8-whatsapp-50.png' %}" alt="logo-watsapp"></li>
+            <li><img src="{% static 'images/sc+linkedin-131965017554733397.png' %}" alt="logo-linkedin"></li>
+            <li><img src="{% static 'images/email-icon-envelope-mail-services-contacts-message-send-letter-isolated-flat-free-vector.png' %}"
+                    alt="logo-email"></li>
+            <li><img src="{% static 'images/insta.png' %}" alt="logo-instagram"></li>
+        </ol>
+    </div>
+
+</body>
+
+</html>
