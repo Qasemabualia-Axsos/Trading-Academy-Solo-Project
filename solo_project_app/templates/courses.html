@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbuAlia ICT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<link rel="stylesheet" href="{% static 'solo_project_app/dashboard.css' %}">
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid ">
+            <img id="logo" src="{% static 'images/channels4_profile.jpg' %}" alt="Trading Academy">
+            <h1>Welcome {{user.first_name}}!</h1>
+
+            <div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <a class="login-link" href="{% url 'logout' %}"><button id="login-btn">Log Out</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="middle">
+        <div class="left">
+            <h1>Courses <a href="{% url 'lessons_page' %}">View my courses</a> </h1>
+            <div class="courses">
+                <h2 style="color: orange;">{{course.title}}</h2>
+                <p>{{course.description}}</p>
+                <div class="feed"
+                    style="border: 3px solid black; margin-top: 20px; background-color: white; color: black;">
+                    <h1>Feedbacks</h1>
+                    {% if course.feedbacks.all %}
+                    {% for fb in course.feedbacks.all %}
+                    <p> <span style="color: #0f828c;">{{fb.user.first_name}} {{fb.user.last_name}}:</span>
+                        {{fb.comment}}</p>
+
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+</body>
+
+</html>
