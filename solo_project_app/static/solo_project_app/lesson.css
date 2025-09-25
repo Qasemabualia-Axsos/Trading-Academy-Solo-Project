@@ -92,10 +92,24 @@ button:hover{
     font-size: 30px;
     font-weight: bold;
 }
+#title a{
+    text-decoration: none;
+    color: white;
+}
 #l-title{
     font-size: 25px;
     
 }
 .search{
+    border: 2px solid black;
+    width: 600px;
+    margin: 20px auto;
     text-align: center;
+    box-shadow: 8px 8px 8px black;
+    padding: 20px;
+    border-radius: 20px;
+}
+input{
+    text-align: center;
+    margin-left: 15%;
 }

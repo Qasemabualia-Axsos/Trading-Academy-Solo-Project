@@ -1,5 +1,5 @@
 import requests
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.contrib import messages
 from .models import *
 import bcrypt
@@ -10,6 +10,7 @@ import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -64,16 +65,34 @@ def register(request):
 
 def dashboard(request):
     if 'userid' not in request.session:
-        messages.error (request,'You Must LogIn First',extra_tags='login')
-        return redirect ('/login_page')
-    logged_user=Users.objects.get(id=request.session['userid'])
-    
-    data={
-        'user':logged_user,
-        'Courses':Courses.objects.all(),
-        'Feedbacks':Feedback.objects.all(),
+        messages.error(request,'You Must LogIn First',extra_tags='login')
+        return redirect('/login_page')
+
+    logged_user = Users.objects.get(id=request.session['userid'])
+
+    # Fetch initial rates safely
+    url = "https://v6.exchangerate-api.com/v6/34e15b3da3713185fe1988ce/latest/USD"
+    data = requests.get(url).json()
+
+    usd_to_eur = eur_to_usd = None  # default values
+    conversion_rates = data.get('conversion_rates')
+    if conversion_rates:
+        usd_to_eur = round(conversion_rates.get('EUR', 0), 5)
+        eur_to_usd = round(1 / usd_to_eur, 5) if usd_to_eur else 0
+    else:
+        # Optional: log or display error message
+        messages.warning(request, f"Forex API error: {data.get('error-type', 'Unknown error')}")
+
+    context = {
+        'user': logged_user,
+        'Courses': Courses.objects.all(),
+        'Feedbacks': Feedback.objects.all(),
+        'initial_rates': {
+            'usd_to_eur': usd_to_eur,
+            'eur_to_usd': eur_to_usd
+        }
     }
-    return render (request,'dashboard.html',data)
+    return render(request, 'dashboard.html', context)
 
 def logout(request):
     request.session.flush()
@@ -100,23 +119,6 @@ def add_feedback(request,course_id):
         return redirect ('/dashboard')
     return redirect ('/dashboard')
 
-def get_rates(request):
-    url = "https://api.currencyfreaks.com/latest"
-    params = {"apikey": "da0d696d119842d8aee0746a8b728773", "symbols": "EUR,GBP,JPY"}
-    resp = requests.get(url, params=params).json()
-
-    eurusd = 1 / float(resp["rates"]["EUR"])
-    usdjpy = float(resp["rates"]["JPY"])
-    gbpusd = 1 / float(resp["rates"]["GBP"])
-    eurgbp = float(resp["rates"]["GBP"]) / float(resp["rates"]["EUR"])
-
-    data = {
-        "eurusd": round(eurusd, 5),
-        "usdjpy": round(usdjpy, 3),
-        "gbpusd": round(gbpusd, 5),
-        "eurgbp": round(eurgbp, 5),
-    }
-    return JsonResponse(data)
 
 def payment_page(request, course_id):
     if "userid" not in request.session:
@@ -178,4 +180,106 @@ def lessons_page(request):
 
     return render (request,'lessons.html',data)
 
+import datetime
 
+def currency_data(request):
+    labels = []
+    prices = []
+
+    today = datetime.date.today()
+    for i in range(7):
+        date = today - datetime.timedelta(days=i)
+        url = f"https://api.exchangerate.host/{date}"
+        params = {"base": "USD", "symbols": "EUR"}
+        response = requests.get(url, params=params).json()
+        
+        if "rates" in response:
+            labels.append(str(date))
+            prices.append(response["rates"]["EUR"])
+
+    labels.reverse()
+    prices.reverse()
+
+    return JsonResponse({"labels": labels, "prices": prices})
+
+import requests
+from django.shortcuts import render
+
+import requests
+from django.shortcuts import render
+
+
+def get_forex_rates(request):
+    url = "https://v6.exchangerate-api.com/v6/34e15b3da3713185fe1988ce/latest/USD"
+    response = requests.get(url)
+    data = response.json()
+
+    # Check if the API returned an error
+    if data.get('result') == 'error':
+        return JsonResponse({'error': data.get('error-type', 'Unknown error')})
+
+    # Safe access
+    conversion_rates = data.get('conversion_rates')
+    if not conversion_rates:
+        return JsonResponse({'error': 'Conversion rates not available'})
+
+    usd_to_eur = conversion_rates.get('EUR')
+    eur_to_usd = 1 / usd_to_eur
+
+    return JsonResponse({
+        'usd_to_eur': usd_to_eur,
+        'eur_to_usd': eur_to_usd
+    })
+
+
+def api_courses(request):
+    courses=list(Courses.objects.values('id','title','description','price'))
+    return JsonResponse({'courses':courses})
+
+def search_lessons(request):
+    query = request.GET.get('q', '').strip()
+    user_id = request.session.get('userid')
+
+    if not user_id:
+        return JsonResponse({'lessons': []})  # not logged in
+
+    # Only get courses the user has purchased
+    purchased_courses = Courses.objects.filter(
+        payments__user_id=user_id,
+        payments__status="completed"  # make sure this matches your Payment.status
+    ).distinct()
+
+    # Only get lessons from those courses
+    lessons = Lesson.objects.filter(
+        course__in=purchased_courses,
+        title__icontains=query
+    )
+
+    data = {
+        'lessons': [
+            {
+                'id': lesson.id,
+                'title': lesson.title,
+                'description': getattr(lesson, 'description', ''),
+                'course_id': lesson.course.id
+            }
+            for lesson in lessons
+        ]
+    }
+    return JsonResponse(data)
+
+
+
+def view_course(request,course_id):
+    if 'userid' not in request.session:
+        messages.error(request,'You Must LogIn First',extra_tags='login')
+        return redirect('/login_page')
+
+    logged_user = Users.objects.get(id=request.session['userid'])
+    course=Courses.objects.get(id=course_id)
+    context = {
+        'user': logged_user,
+        'course': course,
+        'Feedbacks': Feedback.objects.all(),
+    }
+    return render(request, 'courses.html', context)

@@ -14,14 +14,16 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+EXCHANGE_API_KEY = os.getenv("EXCHANGE_API_KEY", "69154e476ace57030cb4d0010844eeb1")
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")  # load environment variables from .env
 
-STRIPE_PUBLIC_KEY = os.getenv("pk_test_51S9WhEHn0qbzGhlAP4SVUDrriSfR4fJlhUIwYEDrvxy08qFXrcZElxIy0ggCiEqQr03YIDA3DrVGxOcYs8UdOVKG009hu7IkPz")
-STRIPE_SECRET_KEY = os.getenv("sk_test_51S9WhEHn0qbzGhlAAesMvEJZjfIOOmRmRQO9lzHzHof7hoaBwTt2DmUj8vWoZaOHML75CwLzDb86zWflKq4hazpO00ewRayB3K")
-
+STRIPE_PUBLIC_KEY = ("pk_test_51S9WhEHn0qbzGhlAP4SVUDrriSfR4fJlhUIwYEDrvxy08qFXrcZElxIy0ggCiEqQr03YIDA3DrVGxOcYs8UdOVKG009hu7IkPz")
+STRIPE_SECRET_KEY = ("sk_test_51S9WhEHn0qbzGhlAAesMvEJZjfIOOmRmRQO9lzHzHof7hoaBwTt2DmUj8vWoZaOHML75CwLzDb86zWflKq4hazpO00ewRayB3K")
+EXCHANGE_API_KEY = os.getenv("EXCHANGE_API_KEY")
 
 
 # Quick-start development settings - unsuitable for production
