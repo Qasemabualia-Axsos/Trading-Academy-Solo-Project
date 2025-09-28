@@ -1,0 +1,209 @@
+.left{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 60px;
+    
+}
+.courses{
+    border: 2px solid black;
+    width: 30%;
+    text-align: center;
+    background-color: #0f828c;
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 10px 4px 6px black;
+}
+
+iframe{
+    border: 3px solid orange;
+    border-radius: 15px;
+    box-shadow: 10px 10px 10px black;
+}
+
+nav{
+    background-color: #0f828c;
+    padding: 0 50px 0 50px;
+}
+.login-link{
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+}
+#login-btn{
+    background-color: #0f828c;
+    box-shadow: 6px 6px 10px black;
+    width: 130px;
+    height: 40px;
+  
+    color: white;
+    font-size: 20px;
+}
+#login-btn:hover{
+    background-color: white;
+    color: black;
+}
+.bottom {
+    background-color: #0f828c;   
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    padding: 30px;
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
+                            
+}
+
+.bottom ol {
+    list-style: none;           
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;                   
+    margin: 0;
+    padding: 0;
+}
+
+.bottom img {
+    width: 30px;                 
+    height: auto;
+}#copyright{
+    font-family: 'Times New Roman', Times, serif;
+}
+.icons{
+    display: flex;
+    justify-content: space-between;
+}
+#logo{
+    height: 50px;
+}
+button{
+    background-color: #0f828c;
+    width: 140px;
+    margin:15px auto; 
+    color: white; 
+    border-radius: 10px;
+    font-family: 'Times New Roman', Times, serif
+}
+button:hover{
+    background-color: rgb(90, 90, 165);
+}
+#title{
+    font-size: 30px;
+    font-weight: bold;
+}
+#title a{
+    text-decoration: none;
+    color: white;
+}
+#l-title{
+    font-size: 25px;
+    
+}
+.search{
+    border: 2px solid black;
+    width: 600px;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 8px 8px 8px black;
+    padding: 20px;
+    border-radius: 20px;
+}
+input{
+    text-align: center;
+    margin-left: 15%;
+}
+
+
+@media only screen and (max-width: 480px) {
+     .navbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+   
+   .bottom {
+        display: none;
+    }
+    .courses{
+        width: 250px;  
+    }
+    button{
+        width: 120px;
+        font-size: 15px;
+        height: 40px;
+    }
+    #comment{
+        width: 80px;
+    }
+    p{
+        font-size: 15px;
+    }
+    .navbar h1{
+        display: none;
+    }
+    .feed {
+        width: 180px;
+    }
+
+    .search{
+        width: 200px;
+    }
+    #lesson-search{
+        display: none;
+    }
+    .left{
+        width: 500px;
+        display: grid;
+    }
+    iframe{
+        width: 250px;
+    }
+
+    
+}
+
+@media only screen and (min-width: 481px) and (max-width:1024px) {
+
+
+   .navbar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .tradingview-widget-container{
+        display: block;
+    }
+   #acd-img{
+    display: none;
+   }
+   .bottom {
+        display: none;
+    }
+    .courses{
+        width: 650px;
+        margin:12px auto;
+        
+    }
+    button{
+        width: 120px;
+        font-size: 15px;
+        height: 40px;
+    }
+    #comment{
+        width: 180px;
+    }
+    p{
+        font-size: 15px;
+    }
+    .navbar h1{
+        display: none;
+    }
+    .feed {
+        width: 300PX;
+    }
+    .tradingview-widget-container{
+       display: none;
+    }
+    
+}
