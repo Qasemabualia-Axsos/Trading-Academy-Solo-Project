@@ -1,0 +1,145 @@
+button{
+    background-color: #0f828c;
+    width: 140px;
+    margin:15px auto; 
+    color: white; 
+    border-radius: 10px;
+    font-family: 'Times New Roman', Times, serif
+}
+button:hover{
+    background-color: rgb(90, 90, 165);
+}
+.container{
+    width: 1800px;
+}
+.bottom {
+    background-color: #0f828c;   
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    padding: 30px;
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
+                            
+}
+
+.bottom ol {
+    list-style: none;           
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;                   
+    margin: 0;
+    padding: 0;
+}
+
+.bottom img {
+    width: 30px;                 
+    height: auto;
+}#copyright{
+    font-family: 'Times New Roman', Times, serif;
+}
+.icons{
+    display: flex;
+    justify-content: space-between;
+}
+#logo{
+    height: 50px;
+}
+
+
+.mb-3{
+    width: 250px;
+
+}
+.card-body{
+    height: 750px;
+    display: flex;
+    justify-content: space-between;
+    animation: slideFade 1s ease-out;
+
+}
+#acd-img{
+    width: 350px;
+    padding: 5px;
+    border: 1px solid black;
+    height: 380px;
+    margin:80px auto;
+    
+    
+    
+}
+.card-header{
+    background-color: #0f828c;
+}
+.row{
+    margin: 20px auto ;
+}
+form{
+    
+    margin:50px auto;
+
+}
+.card{
+    height: 800px;
+}
+
+@keyframes slideFade{
+    from{
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media only screen and (max-width: 480px) {
+  
+   #acd-img{
+    display: none;
+   }
+   .bottom {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width:1024px) {
+
+
+    .all {
+        text-align: center;
+        margin: auto;
+
+    }
+
+    .row {
+        margin: 60px auto;
+    }
+
+    .row a {
+        color: red;
+    }
+
+    .mb-3 {
+        width: 160px;
+        margin: auto;
+    }
+
+    .card {
+        margin: 60px auto;
+        width: 500px;
+
+    }
+
+    #acd-img {
+        width: 40%;
+        height: 40%;
+        margin: auto;
+    }
+     .bottom {
+        position: relative;
+    }
+    
+}

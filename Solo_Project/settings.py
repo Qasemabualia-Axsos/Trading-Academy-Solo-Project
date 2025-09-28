@@ -33,9 +33,9 @@ EXCHANGE_API_KEY = os.getenv("EXCHANGE_API_KEY")
 SECRET_KEY = 'django-insecure-q_qo-k0d=*2(9opof!=y)n+e1^*z8m2m3lp96syks+l8yo$rw+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['34.224.90.18']
 
 
 # Application definition
@@ -131,6 +131,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
