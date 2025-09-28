@@ -18,7 +18,7 @@
             <h1>Welcome {{user.first_name}}!</h1>
 
             <div>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div  id="navbarSupportedContent">
                     <a class="login-link" href="{% url 'logout' %}"><button id="login-btn">Log Out</button></a>
                 </div>
             </div>
@@ -26,22 +26,45 @@
     </nav>
     <div class="middle">
         <div class="left">
-            <h1>Courses <a href="{% url 'lessons_page' %}">View my courses</a> </h1>
+            <h1 class="back"><a href="{% url 'lessons_page' %}"><--- Go Back</a> </h1>
             <div class="courses">
-                <h2 style="color: orange;">{{course.title}}</h2>
-                <p>{{course.description}}</p>
-                <div class="feed"
-                    style="border: 3px solid black; margin-top: 20px; background-color: white; color: black;">
-                    <h1>Feedbacks</h1>
-                    {% if course.feedbacks.all %}
-                    {% for fb in course.feedbacks.all %}
-                    <p> <span style="color: #0f828c;">{{fb.user.first_name}} {{fb.user.last_name}}:</span>
-                        {{fb.comment}}</p>
+                <!-- Course info -->
+                <h2 style="color: orange;">{{ course.title }}</h2>
+                <p>{{ course.description }}</p>
 
+                <!-- Lessons section -->
+                <div class="mt-4">
+                    {% if lessons %}
+                    {% for lesson in lessons %}
+                    <h3>{{lesson.title}}</h3>
+                    <div class="card mb-3 p-3">
+                        <h5>{{ lesson.title }}</h5>
+
+                        {% if lesson.video_url %}
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/{{ lesson.video_url }}" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        {% endif %}
+
+                        {% if lesson.video_file %}
+                        <video width="100%" controls>
+                            <source src="{{ lesson.video_file.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        {% endif %}
+
+                    </div>
                     {% endfor %}
+                    {% else %}
+                    <p>No lessons available yet for this course.</p>
                     {% endif %}
                 </div>
+
+
             </div>
+
         </div>
 
 

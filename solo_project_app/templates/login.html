@@ -15,48 +15,49 @@
 
 
     <!-- login form -->
-
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card shadow-lg rounded-3" style="border: 1px solid black; width: 1000px;">
-                <div class="card-header text-center  text-white">
-                    <h4>Log In</h4>
-                </div>
-                <div class="card-body p-4">
-                    <form action="{% url 'login' %}" method="POST">
-                        {% csrf_token %}
+            <div class="card shadow-lg rounded-3" style="border: 1px solid black; ">
+                <div class="all">
+                    <div class="card-header text-center  text-white">
+                        <h4>Log In</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form action="{% url 'login' %}" method="POST">
+                            {% csrf_token %}
 
-                        <!-- Email -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email">
-                        </div>
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
 
-                        <!-- Password -->
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                        <!-- Submit -->
-                        <div class="d-grid">
-                            <button type="submit">Log In</button>
-                        </div>
-                        <p>Dont have an account?<a href="{% url 'register_page' %}"> Open an Account</a></p>
-                        {% if messages %}
-                        <ul class="messages text-danger">
-                            {% for message in messages %}
-                            {% if 'login' in message.tags %}
-                            <li>{{message}}</li>
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password">
+                            </div>
+                            <!-- Submit -->
+                            <div class="d-grid">
+                                <button type="submit">Log In</button>
+                            </div>
+                            <p>Dont have an account?<a href="{% url 'register_page' %}"> Open an Account</a></p>
+                            {% if messages %}
+                            <ul class="messages text-danger">
+                                {% for message in messages %}
+                                {% if 'login' in message.tags %}
+                                <li>{{message}}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
                             {% endif %}
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </form>
-                    <img id="acd-img" src="{% static 'images/channels4_profile.jpg' %}" alt="acamedy-img">
+                        </form>
+                        <img id="acd-img" src="{% static 'images/channels4_profile.jpg' %}" alt="acamedy-img">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
     </div>
     <div class="bottom " style="height: 80px; padding: 25px;">
         <h1 id="copyright">© ABU ALIA ICT</h1>

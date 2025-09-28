@@ -115,7 +115,7 @@ def add_feedback(request,course_id):
             course=course,
             comment=request.POST.get('comment')
         )
-        messages.success(request, "Feedback added successfully!", extra_tags=f"feedback-{course_id}")
+        # messages.success(request, "Feedback added successfully!", extra_tags=f"feedback-{course_id}")
         return redirect ('/dashboard')
     return redirect ('/dashboard')
 
@@ -202,34 +202,33 @@ def currency_data(request):
 
     return JsonResponse({"labels": labels, "prices": prices})
 
-import requests
-from django.shortcuts import render
 
-import requests
-from django.shortcuts import render
+
 
 
 def get_forex_rates(request):
-    url = "https://v6.exchangerate-api.com/v6/34e15b3da3713185fe1988ce/latest/USD"
-    response = requests.get(url)
-    data = response.json()
+    currencies = ["EUR", "GBP", "JPY", "AUD", "CAD"]  
 
-    # Check if the API returned an error
-    if data.get('result') == 'error':
-        return JsonResponse({'error': data.get('error-type', 'Unknown error')})
+    # Frankfurter API endpoint
+    url = f"https://api.frankfurter.app/latest?from=USD&to={','.join(currencies)}"
+    try:
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()
+        data = response.json()
+    except Exception as e:
+        return JsonResponse({'error': f'API request failed: {e}'})
 
-    # Safe access
-    conversion_rates = data.get('conversion_rates')
-    if not conversion_rates:
+    rates = data.get('rates')
+    if not rates:
         return JsonResponse({'error': 'Conversion rates not available'})
 
-    usd_to_eur = conversion_rates.get('EUR')
-    eur_to_usd = 1 / usd_to_eur
+  
+    forex = {}
+    for currency, rate in rates.items():
+        forex[f"USD_to_{currency}"] = rate
+        forex[f"{currency}_to_USD"] = round(1 / rate, 4)
 
-    return JsonResponse({
-        'usd_to_eur': usd_to_eur,
-        'eur_to_usd': eur_to_usd
-    })
+    return JsonResponse(forex)
 
 
 def api_courses(request):
@@ -241,15 +240,13 @@ def search_lessons(request):
     user_id = request.session.get('userid')
 
     if not user_id:
-        return JsonResponse({'lessons': []})  # not logged in
-
-    # Only get courses the user has purchased
+        return JsonResponse({'lessons': []})  
+    
     purchased_courses = Courses.objects.filter(
         payments__user_id=user_id,
-        payments__status="completed"  # make sure this matches your Payment.status
+        payments__status="completed" 
     ).distinct()
 
-    # Only get lessons from those courses
     lessons = Lesson.objects.filter(
         course__in=purchased_courses,
         title__icontains=query
@@ -269,17 +266,28 @@ def search_lessons(request):
     return JsonResponse(data)
 
 
-
-def view_course(request,course_id):
+def view_course(request, course_id, lesson_id=None):
     if 'userid' not in request.session:
-        messages.error(request,'You Must LogIn First',extra_tags='login')
+        messages.error(request, 'You Must LogIn First', extra_tags='login')
         return redirect('/login_page')
 
     logged_user = Users.objects.get(id=request.session['userid'])
-    course=Courses.objects.get(id=course_id)
+    course = Courses.objects.get(id=course_id)
+
+    if lesson_id:
+        lesson = Lesson.objects.get(id=lesson_id)
+    else:
+        lesson = Lesson.objects.filter(course=course).first()  # default to first lesson
+
+    lessons = [lesson]  # wrap single lesson in list for template loop
+
     context = {
         'user': logged_user,
         'course': course,
-        'Feedbacks': Feedback.objects.all(),
+        'lessons': lessons,
+        'Feedbacks': Feedback.objects.filter(course=course)
     }
     return render(request, 'courses.html', context)
+
+
+

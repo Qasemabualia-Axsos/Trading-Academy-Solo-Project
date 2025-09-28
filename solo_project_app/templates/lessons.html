@@ -18,7 +18,7 @@
             <h1>Welcome {{user.first_name}}!</h1>
 
             <div>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div id="navbarSupportedContent">
                     <a class="login-link" href="{% url 'dashboard' %}"><button id="login-btn">Dashboard</button></a>
                     <a class="login-link" href="{% url 'logout' %}"><button id="login-btn">Log Out</button></a>
                 </div>
@@ -30,7 +30,7 @@
         <input type="text" id="lesson-search" placeholder="Type lesson name..." class="form-control"
             style="width: 400px; margin-bottom: 20px;">
         <div id="search-results">
-            <!-- Filtered lessons will appear here -->
+        
         </div>
         <div id="search-result">
             {% for course in Courses %}
@@ -43,13 +43,11 @@
     </div>
     </div>
     <main>
-        <!-- <a href="https://www.forexfactory.com/attachment/file/4435106?d=1681044827">Get ICT Model 2022 Book</a><br>
-        <a href="https://tools.sodapdf.com/document/b4bfa8d9-209f-4bc2-ac47-e60df44f2ab7">Get SMC Book</a> -->
         <div class="left">
             {% if purchased_courses %}
             {% for course in purchased_courses %}
             <div class="courses">
-                <h1 id="title">Course Name : <a href="{% url 'view_course' course.id%}">{{ course.title }}</a> </h1>
+                <h1 id="title">Course Name : {{ course.title }} </h1>
                 <div class="course-1">
                     {% for lesson in course.lessons.all %}
                     <h2 id="l-title">{{ lesson.order }}. {{ lesson.title }}</h2>
@@ -95,7 +93,8 @@
                         div.innerHTML = `
                     <h4>${lesson.title}</h4>
                     <p>${lesson.description || ''}</p>
-                    <a href="/view_course/${lesson.course_id}">View Course</a>
+                    <a href="/view_course/${lesson.course_id}/lesson/${lesson.id}/">View Lesson</a>
+
                 `;
                         lessonResults.appendChild(div);
                     });

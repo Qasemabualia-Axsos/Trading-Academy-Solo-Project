@@ -64,7 +64,9 @@ button:hover{
     padding: 5px;
     border: 1px solid black;
     height: 380px;
-    margin: auto;
+    margin:80px auto;
+    
+    
     
 }
 .card-header{
@@ -78,6 +80,9 @@ form{
     margin:50px auto;
 
 }
+.card{
+    height: 800px;
+}
 
 @keyframes slideFade{
     from{
@@ -88,4 +93,53 @@ form{
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@media only screen and (max-width: 480px) {
+  
+   #acd-img{
+    display: none;
+   }
+   .bottom {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width:1024px) {
+
+
+    .all {
+        text-align: center;
+        margin: auto;
+
+    }
+
+    .row {
+        margin: 60px auto;
+    }
+
+    .row a {
+        color: red;
+    }
+
+    .mb-3 {
+        width: 160px;
+        margin: auto;
+    }
+
+    .card {
+        margin: 60px auto;
+        width: 500px;
+
+    }
+
+    #acd-img {
+        width: 40%;
+        height: 40%;
+        margin: auto;
+    }
+     .bottom {
+        position: relative;
+    }
+    
 }

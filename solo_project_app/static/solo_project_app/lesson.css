@@ -113,3 +113,97 @@ input{
     text-align: center;
     margin-left: 15%;
 }
+
+
+@media only screen and (max-width: 480px) {
+     .navbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+   
+   .bottom {
+        display: none;
+    }
+    .courses{
+        width: 250px;  
+    }
+    button{
+        width: 120px;
+        font-size: 15px;
+        height: 40px;
+    }
+    #comment{
+        width: 80px;
+    }
+    p{
+        font-size: 15px;
+    }
+    .navbar h1{
+        display: none;
+    }
+    .feed {
+        width: 180px;
+    }
+
+    .search{
+        width: 200px;
+    }
+    #lesson-search{
+        display: none;
+    }
+    .left{
+        width: 500px;
+        display: grid;
+    }
+    iframe{
+        width: 250px;
+    }
+
+    
+}
+
+@media only screen and (min-width: 481px) and (max-width:1024px) {
+
+
+   .navbar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .tradingview-widget-container{
+        display: block;
+    }
+   #acd-img{
+    display: none;
+   }
+   .bottom {
+        display: none;
+    }
+    .courses{
+        width: 650px;
+        margin:12px auto;
+        
+    }
+    button{
+        width: 120px;
+        font-size: 15px;
+        height: 40px;
+    }
+    #comment{
+        width: 180px;
+    }
+    p{
+        font-size: 15px;
+    }
+    .navbar h1{
+        display: none;
+    }
+    .feed {
+        width: 300PX;
+    }
+    .tradingview-widget-container{
+       display: none;
+    }
+    
+}
