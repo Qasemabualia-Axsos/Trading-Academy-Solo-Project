@@ -19,8 +19,11 @@ Our goal is to provide a **user-friendly, scalable, and secure environment** for
 ### 👤 User Management
 - User registration & login with validation
 - Secure password hashing with **bcrypt** 🔒  
-- Session management for logged-in users  
-
+- Session management for logged-in users
+    
+### 📡 API Integration
+- Fetch live currency prices from external trading API
+ 
 ### 📚 Course & Lesson Management
 - Courses can have multiple lessons  
 - Each course has **title, description, price**  
@@ -34,8 +37,7 @@ Our goal is to provide a **user-friendly, scalable, and secure environment** for
 ### 🔍 Search & Navigation
 - Ajax-powered lesson search
   
-### 📡 API Integration
-- Fetch live currency prices from external trading API  
+
 
 ### 🖥️ UI / UX
 - Responsive **Bootstrap** design  
