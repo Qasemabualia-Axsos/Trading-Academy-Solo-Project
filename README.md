@@ -27,7 +27,7 @@ Our goal is to provide a **user-friendly, scalable, and secure environment** for
 - Lessons support video content 🎬  
 
 ### 💳 Payment System
-- Users can purchase courses (dummy or real integration)  
+- Users can purchase courses using stripe
 - Credit card validation  
 - Only paid users can access the course content  
 
