@@ -33,7 +33,7 @@ Our goal is to provide a **user-friendly, scalable, and secure environment** for
 
 ### 🔍 Search & Navigation
 - Ajax-powered lesson search
-- 
+  
 ### 📡 API Integration
 - Fetch live currency prices from external trading API  
 
