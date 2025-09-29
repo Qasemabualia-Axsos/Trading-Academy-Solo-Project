@@ -17,7 +17,7 @@ Our goal is to provide a **user-friendly, scalable, and secure environment** for
 ## ✨ Features
 
 ### 👤 User Management
-- User registration & login  
+- User registration & login with validation
 - Secure password hashing with **bcrypt** 🔒  
 - Session management for logged-in users  
 
