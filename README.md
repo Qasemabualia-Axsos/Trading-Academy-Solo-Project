@@ -3,11 +3,12 @@
 
 ## 🚀 Project Description
 Trading Academy is an **online learning platform** for trading and financial markets. Users can:
-- Register and login 🔑  
+- Register and login 🔑
+- - View live currency prices via API 💱 
 - Browse and enroll in courses 📚  
 - Access structured lessons including videos 🎥  
 - Search lessons with AJAX 🔍  
-- View live currency prices via API 💱  
+ 
 
 Our goal is to provide a **user-friendly, scalable, and secure environment** for learning trading skills.
 
@@ -31,9 +32,8 @@ Our goal is to provide a **user-friendly, scalable, and secure environment** for
 - Only paid users can access the course content  
 
 ### 🔍 Search & Navigation
-- Ajax-powered lesson search  
-- Filter and browse courses by price  
-
+- Ajax-powered lesson search
+- 
 ### 📡 API Integration
 - Fetch live currency prices from external trading API  
 
